@@ -11,6 +11,7 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/grafana/grafana-plugin-sdk-go/data"
+	"github.com/stretchr/testify/require"
 )
 
 var update = flag.Bool("update", false, "update .golden.arrow files")
@@ -225,12 +226,11 @@ func goldenDF() *data.Frame {
 			timePtr(time.Unix(0, maxEcma6Int)),
 			timePtr(time.Unix(0, math.MaxInt64)),
 		}),
-	)
+	).SetMeta(&data.FrameMeta{
+		Custom: map[string]interface{}{"Hi": "there"},
+	})
 
 	df.RefID = "A"
-	df.Meta = &data.FrameMeta{
-		Custom: map[string]interface{}{"Hi": "there"},
-	}
 	return df
 }
 
@@ -299,4 +299,19 @@ func TestEncodeAndDecodeDuplicateFieldNames(t *testing.T) {
 	if diff := cmp.Diff(frame, decoded, data.FrameTestCompareOptions()...); diff != "" {
 		t.Errorf("Result mismatch (-want +got):\n%s", diff)
 	}
+}
+
+func TestFrameMarshalArrowRowLenError(t *testing.T) {
+	f := data.NewFrame("unequal length fields",
+		data.NewField("1", nil, []string{}),
+		data.NewField("1", nil, []string{"a"}),
+	)
+	_, err := f.MarshalArrow()
+	require.Error(t, err)
+}
+
+func TestFrameMarshalArrowNoFields(t *testing.T) {
+	f := data.NewFrame("no fields")
+	_, err := f.MarshalArrow()
+	require.NoError(t, err)
 }
