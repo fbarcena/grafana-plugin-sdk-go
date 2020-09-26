@@ -1,7 +1,7 @@
 package backend
 
 import (
-	"github.com/grafana/grafana-plugin-sdk-go/backend/plugin"
+	"github.com/fbarcena/grafana-plugin-sdk-go/backend/plugin"
 )
 
 //ServeOpts options for serving plugins.

@@ -6,7 +6,7 @@ import (
 	"net/http/pprof"
 	"os"
 
-	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
+	"github.com/fbarcena/grafana-plugin-sdk-go/backend/log"
 )
 
 // SetupPluginEnvironment will read the environment variables and apply the

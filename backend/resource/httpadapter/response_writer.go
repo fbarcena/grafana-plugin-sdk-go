@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"net/http"
 
-	"github.com/grafana/grafana-plugin-sdk-go/backend"
+	"github.com/fbarcena/grafana-plugin-sdk-go/backend"
 )
 
 // callResourceResponseWriter is an implementation of http.ResponseWriter that

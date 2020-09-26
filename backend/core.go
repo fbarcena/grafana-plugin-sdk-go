@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/grafana/grafana-plugin-sdk-go/data"
+	"github.com/fbarcena/grafana-plugin-sdk-go/data"
 )
 
 // User represents the Grafana user.

@@ -9,8 +9,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/fbarcena/grafana-plugin-sdk-go/data"
 	"github.com/google/go-cmp/cmp"
-	"github.com/grafana/grafana-plugin-sdk-go/data"
 )
 
 var update = flag.Bool("update", false, "update .golden.arrow files")

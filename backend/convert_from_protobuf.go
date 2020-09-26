@@ -3,8 +3,8 @@ package backend
 import (
 	"time"
 
-	"github.com/grafana/grafana-plugin-sdk-go/data"
-	"github.com/grafana/grafana-plugin-sdk-go/genproto/pluginv2"
+	"github.com/fbarcena/grafana-plugin-sdk-go/data"
+	"github.com/fbarcena/grafana-plugin-sdk-go/genproto/pluginv2"
 )
 
 type convertFromProtobuf struct {

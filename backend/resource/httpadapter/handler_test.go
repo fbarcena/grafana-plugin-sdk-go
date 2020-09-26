@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/grafana/grafana-plugin-sdk-go/backend"
+	"github.com/fbarcena/grafana-plugin-sdk-go/backend"
 	"github.com/stretchr/testify/require"
 )
 

@@ -8,7 +8,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/grafana/grafana-plugin-sdk-go/backend"
+	"github.com/fbarcena/grafana-plugin-sdk-go/backend"
 )
 
 // New creates a new backend.CallResourceHandler adapter for
