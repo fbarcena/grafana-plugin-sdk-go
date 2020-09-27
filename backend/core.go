@@ -8,14 +8,6 @@ import (
 	"github.com/fbarcena/grafana-plugin-sdk-go/data"
 )
 
-// User represents the Grafana user.
-type User struct {
-	Login string
-	Name  string
-	Email string
-	Role  string
-}
-
 // DataSourceConfig configuration for a datasource plugin.
 type DataSourceConfig struct {
 	ID                      int64

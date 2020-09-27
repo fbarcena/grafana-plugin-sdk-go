@@ -43,7 +43,7 @@ func (a *sdkAdapter) CollectMetrics(ctx context.Context, protoReq *pluginv2.Coll
 
 func (a *sdkAdapter) CheckHealth(ctx context.Context, protoReq *pluginv2.CheckHealthRequest) (*pluginv2.CheckHealthResponse, error) {
 	if a.CheckHealthHandler != nil {
-		res, err := a.CheckHealthHandler.CheckHealth(ctx, fromProto().HealthCheckRequest(protoReq))
+		res, err := a.CheckHealthHandler.CheckHealth(ctx, FromProto().HealthCheckRequest(protoReq))
 		if err != nil {
 			return nil, err
 		}
@@ -56,7 +56,7 @@ func (a *sdkAdapter) CheckHealth(ctx context.Context, protoReq *pluginv2.CheckHe
 }
 
 func (a *sdkAdapter) QueryData(ctx context.Context, req *pluginv2.QueryDataRequest) (*pluginv2.QueryDataResponse, error) {
-	resp, err := a.QueryDataHandler.QueryData(ctx, fromProto().QueryDataRequest(req))
+	resp, err := a.QueryDataHandler.QueryData(ctx, FromProto().QueryDataRequest(req))
 	if err != nil {
 		return nil, err
 	}
@@ -81,11 +81,11 @@ func (a *sdkAdapter) CallResource(protoReq *pluginv2.CallResourceRequest, protoS
 		return protoSrv.Send(toProto().CallResourceResponse(resp))
 	})
 
-	return a.CallResourceHandler.CallResource(protoSrv.Context(), fromProto().CallResourceRequest(protoReq), fn)
+	return a.CallResourceHandler.CallResource(protoSrv.Context(), FromProto().CallResourceRequest(protoReq), fn)
 }
 
 func (a *sdkAdapter) TransformData(ctx context.Context, req *pluginv2.QueryDataRequest, callBack plugin.TransformDataCallBack) (*pluginv2.QueryDataResponse, error) {
-	resp, err := a.TransformDataHandler.TransformData(ctx, fromProto().QueryDataRequest(req), &transformDataCallBackWrapper{callBack})
+	resp, err := a.TransformDataHandler.TransformData(ctx, FromProto().QueryDataRequest(req), &transformDataCallBackWrapper{callBack})
 	if err != nil {
 		return nil, err
 	}
@@ -103,5 +103,5 @@ func (tw *transformDataCallBackWrapper) QueryData(ctx context.Context, req *Quer
 		return nil, err
 	}
 
-	return fromProto().QueryDataResponse(protoRes)
+	return FromProto().QueryDataResponse(protoRes)
 }
