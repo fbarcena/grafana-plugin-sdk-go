@@ -41,4 +41,6 @@ type DataResponse struct {
 	// Add Tables and Timeseries for compatibility with 6.7
 	Series []*pluginv2.TimeSeries
 	Tables []*pluginv2.Table
+
+	JSON string
 }

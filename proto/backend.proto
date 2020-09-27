@@ -131,6 +131,7 @@ message DataResponse {
   bytes jsonMeta = 3; // Warning: Current ignored by frontend. Would be for metadata about the query.
   repeated TimeSeries series = 4; // for use in Grafana 6.7
   repeated Table tables = 5; // for use in Grafana 6.7
+  string json = 6;
 }
 
 // Tables and Timeseries
