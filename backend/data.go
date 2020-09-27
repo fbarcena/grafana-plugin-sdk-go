@@ -14,6 +14,7 @@ type QueryDataResponse struct {
 	Responses Responses
 	Frames    []*data.Frame
 	Metadata  map[string]string
+	Json      string
 }
 
 // NewQueryDataResponse returns a QueryDataResponse with the Responses property initialized.

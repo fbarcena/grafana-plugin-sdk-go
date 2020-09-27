@@ -120,7 +120,7 @@ message QueryDataResponse {
 
   // Additional response metadata
   map<string,string> metadata = 2;
-  bytes json = 3;
+  string json = 3;
 }
 
 message DataResponse {
