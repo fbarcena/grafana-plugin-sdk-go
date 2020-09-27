@@ -5,4 +5,4 @@ import (
 )
 
 // Logger is the default logger instance.
-var Logger log.Logger = log.New()
+var Logger log.Logger = log.DefaultLogger
