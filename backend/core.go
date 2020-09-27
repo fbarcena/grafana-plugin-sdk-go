@@ -4,8 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"time"
-
-	"github.com/fbarcena/grafana-plugin-sdk-go/data"
 )
 
 // DataSourceConfig configuration for a datasource plugin.
@@ -46,12 +44,6 @@ type DataQuery struct {
 	Interval      time.Duration
 	TimeRange     TimeRange
 	JSON          json.RawMessage
-}
-
-// QueryDataResponse holds the results for a given query.
-type QueryDataResponse struct {
-	Frames   []*data.Frame
-	Metadata map[string]string
 }
 
 // TimeRange represents a time range for a query.

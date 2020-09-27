@@ -16,13 +16,22 @@ import (
 
 // Frame represents a columnar storage with optional labels.
 type Frame struct {
-	Name   string
+	// Name is used in some Grafana visualizations.
+	Name string
+
+	// Fields are the columns of a frame.
+	// All Fields must be of the same the length when marshalling the Frame for transmission.
 	Fields []*Field
 
+	// RefID is a property that can be set to match a Frame to its orginating query.
 	RefID    string
 	Meta     *QueryResultMeta
 	Warnings []Warning
 }
+
+// Frames is a slice of Frame pointers.
+// It is the main data container within a backend.DataResponse.
+type Frames []*Frame
 
 // Field represents a column of data with a specific type.
 type Field struct {

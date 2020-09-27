@@ -110,6 +110,10 @@ message QueryDataRequest {
 }
 
 message QueryDataResponse {
+// Map of refId to response
+  map<string,DataResponse> responses = 4;
+
+  // ORIGINAL
   // Arrow encoded DataFrames
   // Each frame encodes its own: Errors, meta, and refId
   repeated bytes frames = 1;
@@ -118,6 +122,66 @@ message QueryDataResponse {
   map<string,string> metadata = 2;
   bytes json = 3;
 }
+
+message DataResponse {
+  // Arrow encoded DataFrames
+  // Frame has its own meta, warnings, and repeats refId
+  repeated bytes frames = 1;
+  string error = 2;
+  bytes jsonMeta = 3; // Warning: Current ignored by frontend. Would be for metadata about the query.
+  repeated TimeSeries series = 4; // for use in Grafana 6.7
+  repeated Table tables = 5; // for use in Grafana 6.7
+}
+
+// Tables and Timeseries
+message TimeSeries {
+  string name = 1;
+  map<string, string> tags = 2;
+  repeated Point points = 3;
+}
+
+message Point {
+  int64 timestamp = 1;
+  double value = 2;
+}
+
+message Table {
+  repeated TableColumn columns = 1;
+  repeated TableRow rows = 2;
+}
+
+message TableColumn {
+  string name = 1;
+}
+
+message TableRow {
+  repeated RowValue values = 1;
+}
+
+message RowValue {
+  enum Kind {
+    // Field type null.
+    TYPE_NULL           = 0;
+    // Field type double.
+    TYPE_DOUBLE          = 1;
+    // Field type int64.
+    TYPE_INT64          = 2;
+    // Field type bool.
+    TYPE_BOOL           = 3;
+    // Field type string.
+    TYPE_STRING         = 4;
+    // Field type bytes.
+    TYPE_BYTES          = 5;
+  };
+
+  Kind kind = 1;
+  double doubleValue = 2;
+  int64 int64Value = 3;
+  bool boolValue = 4;
+  string stringValue = 5;
+  bytes bytesValue = 6;
+}
+
 
 //-----------------------------------------------
 // Diagnostics
