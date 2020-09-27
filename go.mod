@@ -15,7 +15,7 @@ require (
 	github.com/prometheus/client_golang v1.3.0
 	github.com/prometheus/common v0.7.0
 	github.com/stretchr/testify v1.5.1
-	golang.org/x/net v0.0.0-20190923162816-aa69164e4478 // indirect
+	golang.org/x/net v0.0.0-20190923162816-aa69164e4478
 	golang.org/x/text v0.3.2 // indirect
 	google.golang.org/grpc v1.27.1
 	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
