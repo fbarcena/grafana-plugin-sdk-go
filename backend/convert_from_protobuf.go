@@ -98,7 +98,7 @@ func (f ConvertFromProtobuf) QueryDataResponse(protoRes *pluginv2.QueryDataRespo
 			return nil, err
 		}
 	}
-	return &QueryDataResponse{Metadata: protoRes.Metadata, Frames: frames}, nil
+	return &QueryDataResponse{Metadata: protoRes.Metadata, Frames: frames, Json: protoRes.Json}, nil
 }
 
 func (f ConvertFromProtobuf) CallResourceRequest(protoReq *pluginv2.CallResourceRequest) *CallResourceRequest {

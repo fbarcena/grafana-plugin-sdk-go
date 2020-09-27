@@ -120,6 +120,7 @@ func (t convertToProtobuf) QueryDataResponse(res *QueryDataResponse) (*pluginv2.
 	return &pluginv2.QueryDataResponse{
 		Frames:   encodedFrames,
 		Metadata: res.Metadata,
+		Json:     res.Json,
 	}, nil
 }
 
