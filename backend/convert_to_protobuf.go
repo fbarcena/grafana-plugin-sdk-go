@@ -108,6 +108,14 @@ func (t convertToProtobuf) QueryDataRequest(req *QueryDataRequest) *pluginv2.Que
 }
 
 func (t convertToProtobuf) QueryDataResponse(res *QueryDataResponse) (*pluginv2.QueryDataResponse, error) {
+	queryDataResponse := &pluginv2.QueryDataResponse{
+		Responses: make(map[string]*pluginv2.DataResponse, len(res.Responses)),
+	}
+	for refID, dr := range res.Responses {
+		queryDataResponse.Responses[refID] = &pluginv2.DataResponse{
+			Json: dr.JSON,
+		}
+	}
 	encodedFrames := make([][]byte, len(res.Frames))
 	var err error
 	for i, frame := range res.Frames {
@@ -117,11 +125,15 @@ func (t convertToProtobuf) QueryDataResponse(res *QueryDataResponse) (*pluginv2.
 		}
 	}
 
-	return &pluginv2.QueryDataResponse{
-		Frames:   encodedFrames,
-		Metadata: res.Metadata,
-		Json:     res.Json,
-	}, nil
+	queryDataResponse.Frames = encodedFrames
+	queryDataResponse.Metadata = res.Metadata
+	queryDataResponse.Json = res.Json
+	// return &pluginv2.QueryDataResponse{
+	// 	Frames:   encodedFrames,
+	// 	Metadata: res.Metadata,
+	// 	Json:     res.Json,
+	// }, nil
+	return queryDataResponse, nil
 }
 
 func (t convertToProtobuf) CallResourceResponse(resp *CallResourceResponse) *pluginv2.CallResourceResponse {
