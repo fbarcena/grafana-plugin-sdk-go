@@ -112,8 +112,18 @@ func (t convertToProtobuf) QueryDataResponse(res *QueryDataResponse) (*pluginv2.
 		Responses: make(map[string]*pluginv2.DataResponse, len(res.Responses)),
 	}
 	for refID, dr := range res.Responses {
+		// encode DataResponse frames
+		dataResponseEncodedFrames := make([][]byte, len(dr.Frames))
+		var err error
+		for i, frame := range dr.Frames {
+			dataResponseEncodedFrames[i], err = data.MarshalArrow(frame)
+			if err != nil {
+				return nil, err
+			}
+		}
 		queryDataResponse.Responses[refID] = &pluginv2.DataResponse{
-			Json: dr.JSON,
+			Json:   dr.JSON,
+			Frames: dataResponseEncodedFrames,
 		}
 	}
 	encodedFrames := make([][]byte, len(res.Frames))
